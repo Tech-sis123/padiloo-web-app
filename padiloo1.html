@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Padiloo Access - Smart Sanitation</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e6f4ff 100%);
+    }
+    
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #bae6fd;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #0ea5e9 100%);
+    }
+    
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(2, 132, 199, 0.3);
+    }
+    
+    .feature-icon {
+      background: linear-gradient(135deg, #bae6fd 0%, #7dd3fc 100%);
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+  <!-- Navigation Bar -->
+  <header class="hero-gradient text-white shadow-lg fixed w-full z-10">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-toilet-paper text-2xl text-blue-200"></i>
+        <h1 class="text-2xl font-bold tracking-tight">Padiloo<span class="text-blue-200">Access</span></h1>
+      </div>
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="nav-link font-medium text-blue-100 hover:text-white">Home</a>
+        <a href="find.html" class="nav-link font-medium text-blue-100 hover:text-white">Find Toilets</a>
+        <a href="refill.html" class="nav-link font-medium text-blue-100 hover:text-white">Refill Padi Card</a>
+        <a href="tokens.html" class="nav-link font-medium text-blue-100 hover:text-white">Buy Tokens</a>
+        <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full font-medium transition">Login</a>
+      </nav>
+      <button class="md:hidden text-white">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 px-6 hero-gradient text-white">
+    <div class="max-w-5xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Smart Sanitation <br> <span class="text-blue-200">At Your Fingertips</span></h1>
+      <p class="text-xl text-blue-100 max-w-2xl mx-auto mb-8">Access clean, mobile, eco-friendly toilets across Nigeria with your Padi Card or digital tokens.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="find.html" class="btn-primary px-8 py-3 rounded-full font-bold text-white">Find Toilets Nearby</a>
+        <a href="tokens.html" class="bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition">Buy Tokens Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="px-6 max-w-7xl mx-auto -mt-10">
+    <!-- Features Section -->
+    <section class="grid md:grid-cols-3 gap-8 mb-20">
+      <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+        <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+          <i class="fas fa-map-marker-alt text-2xl text-blue-800"></i>
+        </div>
+        <h3 class="text-xl font-bold text-blue-900 mb-3">Find Nearby Toilets</h3>
+        <p class="text-gray-600">Locate clean Padiloo toilets in your area with real-time availability using our GPS map.</p>
+      </div>
+      
+      <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+        <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+          <i class="fas fa-qrcode text-2xl text-blue-800"></i>
+        </div>
+        <h3 class="text-xl font-bold text-blue-900 mb-3">Cashless Access</h3>
+        <p class="text-gray-600">Use your Padi Card or digital tokens (₦100/use) for hygienic, contactless toilet access.</p>
+      </div>
+      
+      <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+        <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+          <i class="fas fa-chart-line text-2xl text-blue-800"></i>
+        </div>
+        <h3 class="text-xl font-bold text-blue-900 mb-3">Track Your Impact</h3>
+        <p class="text-gray-600">See how many liters of water you've saved and your contribution to community sanitation.</p>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="mb-20">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-blue-900 mb-4">How Padiloo Works</h2>
+        <div class="w-20 h-1 bg-blue-500 mx-auto"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="text-center">
+          <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-blue-800 font-bold text-xl">1</span>
+          </div>
+          <h3 class="font-semibold text-blue-800 mb-2">Find</h3>
+          <p class="text-gray-600 text-sm">Locate nearest Padiloo toilet via app</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-blue-800 font-bold text-xl">2</span>
+          </div>
+          <h3 class="font-semibold text-blue-800 mb-2">Pay</h3>
+          <p class="text-gray-600 text-sm">Use tokens or Padi Card for access</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-blue-800 font-bold text-xl">3</span>
+          </div>
+          <h3 class="font-semibold text-blue-800 mb-2">Use</h3>
+          <p class="text-gray-600 text-sm">Enjoy clean, odorless sanitation</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-blue-800 font-bold text-xl">4</span>
+          </div>
+          <h3 class="font-semibold text-blue-800 mb-2">Earn</h3>
+          <p class="text-gray-600 text-sm">Waste becomes valuable fertilizer</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mb-20">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-xl">
+        <div class="md:flex">
+          <div class="md:w-1/2 p-10 bg-blue-50">
+            <h2 class="text-3xl font-bold text-blue-900 mb-6">Our Mission</h2>
+            <p class="text-gray-700 mb-6">
+              To revolutionize sanitation in Africa by providing dignified, mobile, and eco-friendly toilet solutions that turn human waste into wealth.
+            </p>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                  <i class="fas fa-tint text-blue-600"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-blue-800">Water Conservation</h4>
+                  <p class="text-gray-600 text-sm">Each Padiloo toilet saves ~150L of water daily</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                  <i class="fas fa-leaf text-blue-600"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-blue-800">Circular Economy</h4>
+                  <p class="text-gray-600 text-sm">Waste becomes organic fertilizer for farms</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-blue-100 p-2 rounded-lg mr-4">
+                  <i class="fas fa-mobile-alt text-blue-600"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-blue-800">Digital Inclusion</h4>
+                  <p class="text-gray-600 text-sm">App + SMS access for all users</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="md:w-1/2">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Clean toilet facility" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-blue-800 rounded-2xl p-10 text-center text-white mb-20">
+      <h2 class="text-3xl font-bold mb-4">Ready to Experience Smart Sanitation?</h2>
+      <p class="text-blue-100 mb-8 max-w-2xl mx-auto">Join thousands of Nigerians using Padiloo for clean, convenient, and eco-friendly toilet access.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#" class="bg-white text-blue-800 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition">Download App</a>
+        <a href="tokens.html" class="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition">Buy Tokens Now</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <i class="fas fa-toilet-paper text-2xl text-blue-300"></i>
+            <h3 class="text-xl font-bold">Padiloo<span class="text-blue-300">Access</span></h3>
+          </div>
+          <p class="text-blue-200">Smart sanitation solutions for a cleaner, healthier Nigeria.</p>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Home</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Find Toilets</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Padi Card</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Buy Tokens</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Company</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-blue-200 hover:text-white transition">About Us</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Our Technology</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Impact</a></li>
+            <li><a href="#" class="text-blue-200 hover:text-white transition">Careers</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Contact</h4>
+          <ul class="space-y-2">
+            <li class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-300"></i> <a href="mailto:hello@padiloo.com" class="text-blue-200 hover:text-white transition">hello@padiloo.com</a></li>
+            <li class="flex items-center"><i class="fas fa-phone-alt mr-2 text-blue-300"></i> <a href="tel:+2348000000000" class="text-blue-200 hover:text-white transition">0800 000 0000</a></li>
+            <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-blue-300"></i> <span class="text-blue-200">Lagos, Nigeria</span></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-blue-300 mb-4 md:mb-0">&copy; 2025 Padiloo Technologies. All rights reserved.</p>
+        <div class="flex space-x-4">
+          <a href="#" class="text-blue-300 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="text-blue-300 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-blue-300 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-blue-300 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Padiloo Access</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-blue-50 text-gray-800">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Padiloo Access</h1>
+      <nav>
+        <a href="#about" class="mx-2 hover:underline">About</a>
+        <a href="#find" class="mx-2 hover:underline">Find Toilets</a>
+        <a href="#refill" class="mx-2 hover:underline">Refill Card</a>
+        <a href="#tokens" class="mx-2 hover:underline">Buy Tokens</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- About Page -->
+  <section id="about" class="py-12 px-4 max-w-5xl mx-auto">
+    <h2 class="text-3xl font-semibold mb-4 text-blue-700">Smart Sanitation at Your Fingertips</h2>
+    <p class="mb-4">
+      Padiloo Access is the digital companion for our Padiloo Mobile Decomposer Toilets. It helps users find nearby toilets,
+      refill their Padi Cards, buy usage tokens, and promote a clean, dignified environment for all. Designed with the
+      underserved in mind, Padiloo turns human waste into wealth and sustainability.
+    </p>
+    <ul class="list-disc pl-6">
+      <li>Find nearby Padiloo toilets in seconds</li>
+      <li>Pay just ₦100 per use via tokens</li>
+      <li>Refill Padi Cards with ease</li>
+      <li>Track sanitation impact and access community-friendly services</li>
+    </ul>
+  </section>
+
+  <!-- Find Toilet Section -->
+  <section id="find" class="py-12 px-4 bg-blue-100">
+    <h2 class="text-2xl font-bold text-blue-700 mb-4">Find Nearby Padiloo Toilets</h2>
+    <div class="mb-4">
+      <button onclick="getLocation()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Use My Location
+      </button>
+    </div>
+    <div id="toilet-results" class="space-y-4"></div>
+  </section>
+
+  <!-- Refill Padi Card Section -->
+  <section id="refill" class="py-12 px-4">
+    <h2 class="text-2xl font-bold text-blue-700 mb-4">Refill Padi Card</h2>
+    <form class="space-y-4">
+      <input type="text" placeholder="Card ID" class="w-full p-2 border border-gray-300 rounded" required>
+      <input type="number" placeholder="Amount (₦)" class="w-full p-2 border border-gray-300 rounded" required>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Refill Card
+      </button>
+    </form>
+  </section>
+
+  <!-- Buy Tokens Section -->
+  <section id="tokens" class="py-12 px-4 bg-blue-100">
+    <h2 class="text-2xl font-bold text-blue-700 mb-4">Buy Toilet Tokens</h2>
+    <form class="space-y-4">
+      <input type="text" placeholder="User ID or Phone Number" class="w-full p-2 border border-gray-300 rounded" required>
+      <input type="number" placeholder="Number of Tokens" class="w-full p-2 border border-gray-300 rounded" required>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Purchase Tokens
+      </button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white text-center py-6">
+    <p>&copy; 2025 Padiloo | Turning Human Waste into Wealth and Sanitation for All</p>
+  </footer>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      const { latitude, longitude } = position.coords;
+      // Simulated fetch for nearby toilets (in real app, connect to backend)
+      const toilets = [
+        { name: "Padiloo - Market Square", distance: "400m" },
+        { name: "Padiloo - Bus Terminal", distance: "800m" },
+        { name: "Padiloo - Community Hall", distance: "1.2km" },
+      ];
+
+      const resultsDiv = document.getElementById("toilet-results");
+      resultsDiv.innerHTML = "";
+      toilets.forEach(toilet => {
+        const div = document.createElement("div");
+        div.className = "p-4 bg-white border border-gray-200 rounded shadow";
+        div.innerHTML = `<strong>${toilet.name}</strong><p>${toilet.distance} away</p>`;
+        resultsDiv.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
